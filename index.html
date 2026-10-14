@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kevi — Stream & Download Movies</title>
+  <style>
+    :root {
+      --bg-gradient-top: #1e1b4b;
+      --bg-gradient-bottom: #020617;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --accent-purple: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-top) 0%, #0f172a 50%, var(--bg-gradient-bottom) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Grid background effect */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 40px 20px 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Kevi App Logo */
+    .app-logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.45);
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      object-fit: cover;
+    }
+
+    .brand-badge {
+      background: rgba(168, 85, 247, 0.15);
+      color: #d8b4fe;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 440px;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    /* Vertical Phone Mockup Container */
+    .mockup-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .phone-frame {
+      background: #000000;
+      border: 12px solid #1e293b;
+      border-radius: 44px;
+      width: 100%;
+      max-width: 310px;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8),
+                  0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Phone notch */
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 24px;
+      background: #1e293b;
+      border-radius: 12px;
+      z-index: 10;
+    }
+
+    .phone-screen-img {
+      width: 100%;
+      display: block;
+      height: auto;
+      border-radius: 32px;
+    }
+
+    /* Download Section at the Bottom */
+    .download-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 32px 24px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #a855f7, #7e22ce);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 18px 24px;
+      border-radius: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
+      margin-bottom: 16px;
+    }
+
+    .download-btn:active {
+      transform: scale(0.97);
+    }
+
+    .meta-info {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Kevi Logo -->
+    <img src="logo.png" alt="Kevi Logo" class="app-logo" />
+
+    <!-- Version Badge -->
+    <div class="brand-badge">🎬 Kevi App v1.0.0</div>
+    
+    <h1>Cinematic Experience, Right in Your Pocket</h1>
+    <p class="subtitle">Stream top-rated movies, discover new blockbusters, and download your favorite series with zero friction.</p>
+
+    <!-- 4 Vertical Phone Screenshots -->
+    <div class="mockup-container">
+      
+      <!-- Screen 1: Home -->
+      <div class="phone-frame">
+        <img src="screen-home.png" alt="Kevi Home Screen" class="phone-screen-img" />
+      </div>
+
+      <!-- Screen 2: Search -->
+      <div class="phone-frame">
+        <img src="screen-search.png" alt="Kevi Search Screen" class="phone-screen-img" />
+      </div>
+
+      <!-- Screen 3: Watchlist -->
+      <div class="phone-frame">
+        <img src="screen-watchlist.png" alt="Kevi Watchlist Screen" class="phone-screen-img" />
+      </div>
+
+      <!-- Screen 4: Profile -->
+      <div class="phone-frame">
+        <img src="screen-profile.png" alt="Kevi Profile Screen" class="phone-screen-img" />
+      </div>
+
+    </div>
+
+    <!-- Download Section at the Bottom -->
+    <div class="download-section">
+      <!-- REPLACE 'YOUR_APK_URL_HERE' WITH YOUR GITHUB RELEASE DIRECT LINK WHEN READY -->
+      <a href="YOUR_APK_URL_HERE" class="download-btn">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
+        </svg>
+        Download APK for Android
+      </a>
+      
+      <div class="meta-info">
+        <span>📱 Android 7.0+</span>
+        <span>•</span>
+        <span>⚡ Fast Download</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
