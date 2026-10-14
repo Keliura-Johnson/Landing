@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kevi — Stream & Download Movies</title>
+
+  <!-- Preload critical images above the fold -->
+  <link rel="preload" as="image" href="logo.png" />
+  <link rel="preload" as="image" href="screen-home.png" />
+
   <style>
     :root {
       --bg-gradient-top: #1e1b4b;
@@ -109,6 +114,7 @@
       border-radius: 44px;
       width: 100%;
       max-width: 310px;
+      aspect-ratio: 9 / 19.5; /* Prevents layout jump while loading */
       box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8),
                   0 0 0 1px rgba(255, 255, 255, 0.15) inset;
       overflow: hidden;
@@ -131,9 +137,11 @@
 
     .phone-screen-img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      height: auto;
       border-radius: 32px;
+      content-visibility: auto; /* Fast modern rendering */
     }
 
     /* Download Section at the Bottom */
@@ -182,7 +190,7 @@
 
   <div class="wrapper">
     <!-- Kevi Logo -->
-    <img src="logo.png" alt="Kevi Logo" class="app-logo" />
+    <img src="logo.png" alt="Kevi Logo" class="app-logo" width="88" height="88" fetchpriority="high" />
 
     <!-- Version Badge -->
     <div class="brand-badge">🎬 Kevi App v1.0.0</div>
@@ -193,24 +201,24 @@
     <!-- 4 Vertical Phone Screenshots -->
     <div class="mockup-container">
       
-      <!-- Screen 1: Home -->
+      <!-- Screen 1: Home (High Priority Above-The-Fold) -->
       <div class="phone-frame">
-        <img src="screen-home.png" alt="Kevi Home Screen" class="phone-screen-img" />
+        <img src="screen-home.png" alt="Kevi Home Screen" class="phone-screen-img" width="310" height="670" fetchpriority="high" />
       </div>
 
-      <!-- Screen 2: Search -->
+      <!-- Screen 2: Search (Lazy Loaded Below-The-Fold) -->
       <div class="phone-frame">
-        <img src="screen-search.png" alt="Kevi Search Screen" class="phone-screen-img" />
+        <img src="screen-search.png" alt="Kevi Search Screen" class="phone-screen-img" width="310" height="670" loading="lazy" decoding="async" />
       </div>
 
-      <!-- Screen 3: Watchlist -->
+      <!-- Screen 3: Watchlist (Lazy Loaded Below-The-Fold) -->
       <div class="phone-frame">
-        <img src="screen-watchlist.png" alt="Kevi Watchlist Screen" class="phone-screen-img" />
+        <img src="screen-watchlist.png" alt="Kevi Watchlist Screen" class="phone-screen-img" width="310" height="670" loading="lazy" decoding="async" />
       </div>
 
-      <!-- Screen 4: Profile -->
+      <!-- Screen 4: Profile (Lazy Loaded Below-The-Fold) -->
       <div class="phone-frame">
-        <img src="screen-profile.png" alt="Kevi Profile Screen" class="phone-screen-img" />
+        <img src="screen-profile.png" alt="Kevi Profile Screen" class="phone-screen-img" width="310" height="670" loading="lazy" decoding="async" />
       </div>
 
     </div>
